@@ -64,12 +64,10 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-  function extractNameFromTemplate(value) {
-    const startIndex = value.indexOf(' ') + 1;
-    const endIndex = value.lastIndexOf('!');
-    const name = value.slice(startIndex, endIndex);
-    return name;
-  }
+  const startIndex = value.indexOf(' ') + 1;
+  const endIndex = value.lastIndexOf('!');
+  const name = value.slice(startIndex, endIndex);
+  return name;
 }
 
 /**
@@ -82,8 +80,8 @@ function extractNameFromTemplate(value) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar( value ) {
-  return value[0]
+function getFirstChar(value) {
+  return value[0];
 }
 
 /**
@@ -97,8 +95,8 @@ function getFirstChar( value ) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces( value ) {
-  return value.trim()
+function removeLeadingAndTrailingWhitespaces(value) {
+  return value.trim();
 }
 
 /**
@@ -112,8 +110,8 @@ function removeLeadingAndTrailingWhitespaces( value ) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString( value, count ) {
-	return value.repeat(count);
+function repeatString(value, count) {
+  return value.repeat(count);
 }
 
 /**
@@ -128,7 +126,7 @@ function repeatString( value, count ) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences( str, value ) {
+function removeFirstOccurrences(str, value) {
   const pattern = new RegExp(value);
   return str.replace(pattern, '');
 }
@@ -144,12 +142,11 @@ function removeFirstOccurrences( str, value ) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag( str ) {
-	if (str.startsWith('<') && str.endsWith('>')) {
+function unbracketTag(str) {
+  if (str.startsWith('<') && str.endsWith('>')) {
     return str.substring(1, str.length - 1);
-  } else {
-    return str; // Return the input string if it doesn't start with '<' or end with '>'
   }
+  return str; // Return the input string if it doesn't start with '<' or end with '>'
 }
 
 /**
@@ -162,8 +159,8 @@ function unbracketTag( str ) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase( str ) {
-  return str.toUpperCase()
+function convertToUpperCase(str) {
+  return str.toUpperCase();
 }
 
 /**
@@ -219,7 +216,7 @@ function getRectangleString(width, height) {
   const middleLine = `│${' '.repeat(width - 2)}│`;
   const bottomLine = `└${horizontalBorder}┘`;
 
-  return `${topLine}\n${middleLine}\n`.repeat(height - 2) + bottomLine + '\n';
+  return `${`${topLine}\n${middleLine}\n`.repeat(height - 2) + bottomLine}\n`;
 }
 
 /**
@@ -238,8 +235,8 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13( str ) {
-	return str.replace(/[a-zA-Z]/g, function (c) {
+function encodeToRot13(str) {
+  return str.replace(/[a-zA-Z]/g, (c) => {
     const isUpperCase = c === c.toUpperCase();
     const shift = isUpperCase ? 65 : 97;
     return String.fromCharCode(((c.charCodeAt(0) - shift + 13) % 26) + shift);
@@ -259,9 +256,9 @@ function encodeToRot13( str ) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-  function isString(value) {
-		return typeof value === 'string' || value instanceof String;
-	}
+function isString(value) {
+  return typeof value === 'string' || value instanceof String;
+}
 
 
 /**
@@ -290,13 +287,13 @@ function encodeToRot13( str ) {
  */
 function getCardId(value) {
   const initialDeck = [
-    'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
-    'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
-    'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
-    'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
   ];
 
-  for (let i = 0; i < initialDeck.length; i++) {
+  for (let i = 0; i < initialDeck.length; i) {
     if (initialDeck[i] === value) {
       return i;
     }

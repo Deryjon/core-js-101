@@ -29,13 +29,12 @@
 function getFizzBuzz(num) {
   if (num % 3 === 0 && num % 5 === 0) {
     return 'FizzBuzz';
-  } else if (num % 3 === 0) {
+  } if (num % 3 === 0) {
     return 'Fizz';
-  } else if (num % 5 === 0) {
+  } if (num % 5 === 0) {
     return 'Buzz';
-  } else {
-    return num;
   }
+  return num;
 }
 
 /**
@@ -71,7 +70,7 @@ function getFactorial(n) {
 function getSumBetweenNumbers(n1, n2) {
   let sum = 0;
 
-  for (let i = n1; i <= n2; i++) {
+  for (let i = n1; i <= n2; i) {
     sum += i;
   }
 
@@ -136,10 +135,10 @@ function doRectanglesOverlap(rect1, rect2) {
   const rect2Bottom = rect2.top + rect2.height;
 
   return (
-    rect1.left < rect2Right &&
-    rect1Right > rect2.left &&
-    rect1.top < rect2Bottom &&
-    rect1Bottom > rect2.top
+    rect1.left < rect2Right
+    && rect1Right > rect2.left
+    && rect1.top < rect2Bottom
+    && rect1Bottom > rect2.top
   );
 }
 
@@ -171,7 +170,7 @@ function doRectanglesOverlap(rect1, rect2) {
  */
 function isInsideCircle(circle, point) {
   const distance = Math.sqrt(
-    (point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2
+    (point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2,
   );
 
   return distance <= circle.radius;
@@ -191,11 +190,11 @@ function isInsideCircle(circle, point) {
 function findFirstSingleChar(str) {
   const charCount = {};
 
-  for (let char of str) {
+  for (const char of str) {
     charCount[char] = (charCount[char] || 0) + 1;
   }
 
-  for (let char of str) {
+  for (const char of str) {
     if (charCount[char] === 1) {
       return char;
     }
@@ -365,7 +364,7 @@ function isBracketsBalanced(str) {
   };
 
   const stack = [];
-  for (let char of str) {
+  for (const char of str) {
     if (bracketPairs[char]) {
       stack.push(char);
     } else if (Object.values(bracketPairs).includes(char)) {
@@ -414,11 +413,11 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath( pathes ) {
+function getCommonDirectoryPath(pathes) {
   const commonParts = paths
-    .map(path => path.split('/'))
+    .map((path) => path.split('/'))
     .reduce((prev, current) => {
-      for (let i = 0; i < Math.min(prev.length, current.length); i++) {
+      for (let i = 0; i < Math.min(prev.length, current.length); i) {
         if (prev[i] !== current[i]) {
           return prev.slice(0, i);
         }
@@ -426,7 +425,7 @@ function getCommonDirectoryPath( pathes ) {
       return current;
     });
 
-  return commonParts.join('/') + '/';
+  return `${commonParts.join('/')}/`;
 }
 
 /**
@@ -447,23 +446,24 @@ function getCommonDirectoryPath( pathes ) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct( m1, m2 ) {
-	const result = [];
+function getMatrixProduct(m1, m2) {
+  const result = [];
   const m1Rows = m1.length;
   const m1Cols = m1[0].length;
   const m2Cols = m2[0].length;
 
-  for (let i = 0; i < m1Rows; i++) {
+  for (let i = 0; i < m1Rows; i) {
     result[i] = [];
-    for (let j = 0; j < m2Cols; j++) {
+    for (let j = 0; j < m2Cols; j) {
       result[i][j] = 0;
-      for (let k = 0; k < m1Cols; k++) {
+      for (let k = 0; k < m1Cols; k) {
         result[i][j] += m1[i][k] * m2[k][j];
       }
     }
   }
 
-  return result;}
+  return result;
+}
 
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
@@ -495,12 +495,12 @@ function getMatrixProduct( m1, m2 ) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition( position ) {
+function evaluateTicTacToePosition(position) {
   const checkRows = () => {
-    for (let row = 0; row < 3; row++) {
+    for (let row = 0; row < 3; row) {
       if (
-        position[row][0] === position[row][1] &&
-        position[row][1] === position[row][2]
+        position[row][0] === position[row][1]
+        && position[row][1] === position[row][2]
       ) {
         return position[row][0];
       }
@@ -509,10 +509,10 @@ function evaluateTicTacToePosition( position ) {
   };
 
   const checkColumns = () => {
-    for (let col = 0; col < 3; col++) {
+    for (let col = 0; col < 3; col) {
       if (
-        position[0][col] === position[1][col] &&
-        position[1][col] === position[2][col]
+        position[0][col] === position[1][col]
+        && position[1][col] === position[2][col]
       ) {
         return position[0][col];
       }
@@ -522,15 +522,15 @@ function evaluateTicTacToePosition( position ) {
 
   const checkDiagonals = () => {
     if (
-      position[0][0] === position[1][1] &&
-      position[1][1] === position[2][2]
+      position[0][0] === position[1][1]
+      && position[1][1] === position[2][2]
     ) {
       return position[0][0];
     }
 
     if (
-      position[0][2] === position[1][1] &&
-      position[1][1] === position[2][0]
+      position[0][2] === position[1][1]
+      && position[1][1] === position[2][0]
     ) {
       return position[0][2];
     }
