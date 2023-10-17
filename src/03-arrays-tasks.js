@@ -338,11 +338,13 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  const positiveCount = 0;
-  for (let i = 0; i < arr.length; i) {
+  let positiveCount = 0;
+  let i = 0;
+  while (i < arr.length) {
     if (typeof arr[i] === 'number' && arr[i] > 0) {
-      positiveCount;
+      positiveCount += 1;
     }
+    i += 1;
   }
   return positiveCount;
 }
@@ -412,18 +414,17 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-  const falsyCount = 0;
-
-  // Iterate through the input array 'arr'.
-  for (let i = 0; i < arr.length; i) {
-    // Check if the current element is falsy using a condition.
+  let falsyCount = 0;
+  let i = 0;
+  while (i < arr.length) {
     if (!arr[i]) {
-      falsyCount; // Increment the counter if the element is falsy.
+      falsyCount += 1;
     }
+    i += 1;
   }
-
   return falsyCount;
 }
+
 
 /**
  * Returns a number of all occurrences of the specified item in an array
@@ -440,16 +441,17 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurrences(arr, item) {
-  const count = 0;
-
-  for (let i = 0; i < arr.length; i) {
+  let count = 0;
+  let i = 0;
+  while (i < arr.length) {
     if (arr[i] === item) {
-      count;
+      count += 1;
     }
+    i += 1;
   }
-
   return count;
 }
+
 
 /**
  * Concatenates all elements from specified array into single string with ',' delimiter

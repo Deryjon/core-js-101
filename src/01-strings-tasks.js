@@ -208,16 +208,35 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
   if (width < 2 || height < 2) {
-    return 'Invalid input: Both width and height should be at least 2.';
+    return '';
   }
 
-  const horizontalBorder = '─'.repeat(width - 2);
-  const topLine = `┌${horizontalBorder}┐`;
-  const middleLine = `│${' '.repeat(width - 2)}│`;
-  const bottomLine = `└${horizontalBorder}┘`;
+  let rectangle = '';
 
-  return `${`${topLine}\n${middleLine}\n`.repeat(height - 2) + bottomLine}\n`;
+  for (let row = 0; row < height; row += 1) {
+    for (let col = 0; col < width; col += 1) {
+      if (row === 0 && col === 0) {
+        rectangle += '┌';
+      } else if (row === 0 && col === width - 1) {
+        rectangle += '┐';
+      } else if (row === height - 1 && col === 0) {
+        rectangle += '└';
+      } else if (row === height - 1 && col === width - 1) {
+        rectangle += '┘';
+      } else if (row === 0 || row === height - 1) {
+        rectangle += '─';
+      } else if (col === 0 || col === width - 1) {
+        rectangle += '│';
+      } else {
+        rectangle += ' ';
+      }
+    }
+    rectangle += '\n';
+  }
+
+  return rectangle;
 }
+
 
 /**
  * Encode specified string with ROT13 cipher

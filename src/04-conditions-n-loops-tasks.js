@@ -177,31 +177,29 @@ function isInsideCircle(circle, point) {
 }
 
 /**
- * Returns the first non repeated char in the specified strings otherwise returns null.
- *
- * @param {string} str
- * @return {string}
- *
- * @example:
- *   'The quick brown fox jumps over the lazy dog' => 'T'
- *   'abracadabra'  => 'c'
- *   'entente' => null
- */
+   * Returns the first non repeated char in the specified strings otherwise returns null.
+   *
+   * @param {string} str
+   * @return {string}
+   *
+   * @example:
+   *   'The quick brown fox jumps over the lazy dog' => 'T'
+   *   'abracadabra'  => 'c'
+   *   'entente' => null
+   */
 function findFirstSingleChar(str) {
   const charCount = {};
 
-  for (const char of str) {
+  Array.from(str).forEach((char) => {
     charCount[char] = (charCount[char] || 0) + 1;
-  }
+  });
 
-  for (const char of str) {
-    if (charCount[char] === 1) {
-      return char;
-    }
-  }
 
-  return null;
+  const firstSingleChar = Array.from(str).find((char) => charCount[char] === 1);
+
+  return firstSingleChar || null;
 }
+
 
 /**
  * Returns the string representation of math interval,
@@ -260,7 +258,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-  const reversedNum = parseInt(num.toString().split('').reverse().join(''));
+  const reversedNum = parseInt(num.toString().split('').reverse().join(''), 10);
   return reversedNum * Math.sign(num);
 }
 
@@ -289,22 +287,25 @@ function isCreditCardNumber(ccn) {
   let sum = 0;
   let double = false;
 
-  for (let i = ccnStr.length - 1; i >= 0; i--) {
-    let digit = parseInt(ccnStr[i]);
+  for (let i = 0; i < ccnStr.length; i += 1) {
+    let digit = parseInt(ccnStr[i], 10); // Добавляем основание 10
 
     if (double) {
       digit *= 2;
-      if (digit > 9) {
+      if (digit >= 10) {
         digit -= 9;
       }
+      double = false;
+    } else {
+      double = true;
     }
 
     sum += digit;
-    double = !double;
   }
 
   return sum % 10 === 0;
 }
+
 
 /**
  * Returns the digital root of integer:
@@ -324,14 +325,7 @@ function getDigitalRoot(num) {
   if (num < 10) {
     return num;
   }
-
-  let sum = 0;
-  while (num > 0) {
-    sum += num % 10;
-    num = Math.floor(num / 10);
-  }
-
-  return getDigitalRoot(sum);
+  return 1 + ((num - 1) % 9);
 }
 
 /**
@@ -364,18 +358,21 @@ function isBracketsBalanced(str) {
   };
 
   const stack = [];
-  for (const char of str) {
+  let isBalanced = true;
+
+  Array.from(str).forEach((char) => {
     if (bracketPairs[char]) {
       stack.push(char);
     } else if (Object.values(bracketPairs).includes(char)) {
       if (bracketPairs[stack.pop()] !== char) {
-        return false;
+        isBalanced = false;
       }
     }
-  }
+  });
 
-  return stack.length === 0;
+  return isBalanced && stack.length === 0;
 }
+
 
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
@@ -414,7 +411,7 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  const commonParts = paths
+  const commonParts = pathes
     .map((path) => path.split('/'))
     .reduce((prev, current) => {
       for (let i = 0; i < Math.min(prev.length, current.length); i) {
